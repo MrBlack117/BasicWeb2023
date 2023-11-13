@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="style.css" rel="stylesheet">
+
+</head>
+<body>
+<form class="form">
+    <h1 class="form__title">Форма для заповнення</h1>
+    <div class="form__group">
+        <input class="form__input input-name" placeholder=" ">
+        <label class="form__label">ПІБ</label>
+    </div>
+
+    <div class="form__group">
+        <input class="form__input input-group" placeholder=" ">
+        <label class="form__label">Група</label>
+    </div>
+
+    <div class="form__group">
+        <input class="form__input input-phone" placeholder=" ">
+        <label class="form__label">Телефон</label>
+    </div>
+
+    <div class="form__group">
+        <input class="form__input input-address" placeholder=" ">
+        <label class="form__label">Адреса</label>
+    </div>
+
+    <div class="form__group">
+        <input class="form__input input-email" placeholder=" ">
+        <label class="form__label">e-mail</label>
+    </div>
+
+    <button class="form__button">Підтвердити</button>
+</form>
+<div class="results" hidden>
+    <h1 class="result__title">Успішно</h1>
+    <h3 class="result__title">Введені дані:</h3>
+    <p class="result__name"></p>
+    <p class="result__group"></p>
+    <p class="result__phone"></p>
+    <p class="result__address"></p>
+    <p class="result__email"></p>
+</div>
+</body>
+<script src="script.js"></script>
+</html>

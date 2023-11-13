@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Socket chat</title>
+</head>
+<body>
+<div class="header">
+    <h1>Socket chat!</h1>
+</div>
+
+<ul id="messages"></ul>
+<form id="form" action="" class="data-input">
+    <input id="name" class="name-input" placeholder="Ім'я">
+    <input id="input" autocomplete="off" class="message-input" placeholder="Повідомлення"/>
+    <button>Send</button>
+</form>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+
+    const form = document.getElementById('form');
+    const input = document.getElementById('input');
+    const name = document.getElementById('name');
+    const messages = document.getElementById('messages');
+    const random = Math.floor(Math.random() * 10)
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (input.value && name.value) {
+            socket.emit('chat message', {text: input.value, user: name.value, color: random});
+            input.value = '';
+        }
+    });
+
+    socket.on('chat message', (msg) => {
+        const item = document.createElement('div');
+        item.classList.add('message', 'color-' + msg.color)
+        item.innerHTML = "<b>" + msg.user + "</b>: " + msg.text
+        messages.appendChild(item);
+        window.scrollTo(0, document.body.scrollHeight);
+    });
+</script>
+</body>
+</html>

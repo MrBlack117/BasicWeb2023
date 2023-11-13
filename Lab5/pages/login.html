@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .form, .results {
+        width: 350px;
+        padding: 32px;
+        border-radius: 15px;
+        box-shadow: 0 5px 16px lightgray;
+        font-family: sans-serif;
+        letter-spacing: 1px;
+    }
+
+    .form__input,
+    .form__button {
+        font-family: sans-serif;
+        letter-spacing: 1px;
+        font-size: 16px;
+    }
+
+    .form__title {
+        text-align: center;
+        margin: 0 0 40px 0;
+    }
+
+    .form__group {
+        position: relative;
+        margin-bottom: 32px;
+    }
+
+    .form__label {
+        position: absolute;
+        top: 0;
+        z-index: -1;
+        color: gray;
+        transition: 0.3s;
+    }
+
+    .form__input {
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid gray;
+        background-color: transparent;
+        outline: none;
+        transition: 0.3s;
+    }
+
+    .form__input:focus {
+        border-bottom: 1px solid darkslategrey;
+    }
+
+    .form__button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        background-color: cornflowerblue;
+        outline: none;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .form__button:focus,
+    .form__button:hover {
+        background-color: darkblue;
+    }
+
+    .form__input:focus ~ .form__label,
+    .form__input:not(:placeholder-shown) ~ .form__label {
+        top: -18px;
+        font-size: 12px;
+        color: lightgray;
+    }
+
+    .error-label {
+        color: red;
+    }
+
+    a {
+        padding-left: 150px;
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="">
+    <title>Title</title>
+</head>
+<body>
+
+<form class="form" id="form">
+    <h1 class="form__title">Форма авторизації</h1>
+    <div id="message"></div>
+    <div class="form__group">
+        <input class="form__input input-login" name="email" placeholder=" ">
+        <label class="form__label">Пошта</label>
+    </div>
+
+    <div class="form__group">
+        <input class="form__input input-password" type="password" name="password" placeholder=" ">
+        <label class="form__label">Пароль</label>
+    </div>
+
+    <button class="form__button" type="submit">Увійти</button>
+    <a href="/registration">Реєстрація</a>
+
+
+</form>
+
+<div class="results" hidden>
+    <h1 class="result__title">Успішно</h1>
+    <h3 class="result__title">Дані користувача:</h3>
+    <p class="result__name"></p>
+    <p class="result__group"></p>
+    <p class="result__phone"></p>
+    <p class="result__address"></p>
+    <p class="results__admin"></p>
+</div>
+</body>
+<script>
+    window.onload = () => {
+        const form = document.querySelector('#form')
+        form.addEventListener('submit', evt => {
+            evt.preventDefault()
+
+            const email = form.elements.email.value;
+            const password = form.elements.password.value;
+
+            fetch('/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({name, email, password})
+            }).then((res) => res.json())
+                .then(data => {
+                    if (data.message === 'Success') {
+                        const form = document.getElementById('form');
+                        const results = document.querySelector('.results')
+
+                        const name = document.querySelector('.result__name');
+                        const group = document.querySelector('.result__group');
+                        const phone = document.querySelector('.result__phone');
+                        const address = document.querySelector('.result__address');
+                        const admin = document.querySelector('.results__admin');
+
+                        name.textContent = data.userData.name
+                        group.textContent = data.userData.group
+                        phone.textContent = data.userData.phone
+                        address.textContent = data.userData.address
+                        if (data.userData.isAdmin){
+                            admin.textContent = 'Адміністратор'
+                        } else {
+                            admin.textContent = 'Не є адміністратором'
+                        }
+
+                        form.hidden = true;
+                        results.hidden = false;
+                    } else {
+                        alert(data.message)
+                    }
+
+
+                })
+                .catch(error => console.error(error))
+        })
+    }
+</script>
+</html>

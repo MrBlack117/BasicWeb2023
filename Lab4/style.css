@@ -1,0 +1,99 @@
+body {
+    background-color: darkturquoise;
+}
+
+.header {
+    display: flex;
+    background-color: cornflowerblue;
+    height: 250px;
+    font-family: 'Brush Script MT', cursive;
+    font-size: 55px;
+    justify-content: center;
+    align-items: center;
+}
+
+.data-input {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+
+}
+
+.message-input {
+    width: 80vw;
+    height: 40px;
+    border-radius: 50px;
+
+}
+.name-input{
+    height: 40px;
+    border-radius: 50px;
+}
+
+button {
+    width: 10vw;
+    background-color: cornflowerblue;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+.message {
+    font-family: sans-serif;
+    letter-spacing: 1px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    background-color: aqua;
+    border-radius: 50px;
+    height: 30px;
+    padding-top: 0.7rem;
+    padding-left: 0.7rem;
+}
+
+.color-1{
+    background-color: lightyellow;
+}
+
+.color-2{
+    background-color: darkseagreen;
+}
+
+.color-3{
+    background-color: khaki;
+}
+
+.color-4{
+    background-color: rosybrown;
+}
+
+.color-5{
+    background-color: lightsteelblue;
+}
+
+.color-6{
+    background-color: chartreuse;
+}
+
+.color-7{
+    background-color: lightpink;
+}
+
+.color-8{
+    background-color: mediumaquamarine;
+}
+
+.color-9{
+    background-color: thistle;
+}
+
+.color-10{
+    background-color: tan;
+}
